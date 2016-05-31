@@ -74,9 +74,9 @@ class Solution {
     
     while (lo < hi)
     {
-    if (s[lo] != s[hi]) break;
-    lo++;
-    hi--;
+      if (s[lo] != s[hi]) break;
+      lo++;
+      hi--;
     }
     
     return (lo >= hi);
