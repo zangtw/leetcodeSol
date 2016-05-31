@@ -12,7 +12,38 @@ typedef struct Interval {
 
 class Solution {
 public:
-  vector<Interval> merge(vector<Interval>& intervals) {
+  vector<Interval> merge_NlgN(vector<Interval>& intervals) {
+    sort(intervals.begin(), intervals.end(), 
+        [](Interval& a1, Interval& a2){ return a1.start < a2.start;} );
+  
+    int n = intervals.size();
+    int strt = INT_MIN, end = INT_MIN;
+    vector<Interval> res;
+    
+    for (int i = 0; i < n; i++)
+    {
+      if (intervals[i].start > end)
+      {
+        if (strt != INT_MIN && end != INT_MIN)
+          res.push_back(Interval(strt, end));
+          
+        strt = intervals[i].start;
+        end = intervals[i].end;
+      }
+      else 
+      {
+        strt = min(strt, intervals[i].start);
+        end = max(end, intervals[i].end);
+      }
+    }
+            
+    if (strt != INT_MIN && end != INT_MIN)
+      res.push_back(Interval(strt, end));
+  
+    return res;
+  }
+
+  vector<Interval> merge_N2(vector<Interval>& intervals) {
     int n = intervals.size();
     list<Interval> intervalSet;
     vector<Interval> res;
@@ -27,7 +58,7 @@ public:
     
         if (haveIntersection(currInterval, myInterval))
         {
-          merge(currInterval, myInterval);
+          merge2Interval(currInterval, myInterval);
           it = intervalSet.erase(it);
         }
         else
@@ -51,7 +82,7 @@ public:
            (a1.end >= a2.start && a1.end <= a2.end);
   }
   
-  void merge(Interval& strt, Interval& dest)
+  void merge2Interval(Interval& strt, Interval& dest)
   {
     dest.start = min(strt.start, dest.start);
     dest.end = max(strt.end, dest.end);
