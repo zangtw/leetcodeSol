@@ -82,11 +82,11 @@ int main()
   Solution sol;
   vector<pair<int, int>> pos;
 
-  pos.push_back(make_pair<int,int>(0, 0));
-  pos.push_back(make_pair<int,int>(7, 1));
-  pos.push_back(make_pair<int,int>(6, 1));
-  pos.push_back(make_pair<int,int>(3, 3));
-  pos.push_back(make_pair<int,int>(4, 1));
+  pos.push_back(make_pair(0, 0));
+  pos.push_back(make_pair(7, 1));
+  pos.push_back(make_pair(6, 1));
+  pos.push_back(make_pair(3, 3));
+  pos.push_back(make_pair(4, 1));
 
   vector<int> res = sol.numIslands2(8, 4, pos);
   for (int i = 0; i < res.size(); i++)
